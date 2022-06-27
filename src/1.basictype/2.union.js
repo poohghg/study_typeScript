@@ -1,4 +1,6 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.simpleType = void 0;
 function basiCcombine() {
     // 유니언 타입: 인자값으로 여러타입이 올수 있음.
     function combine(input1, input2) {
@@ -35,7 +37,7 @@ function literalType() {
 }
 // literalType();
 function simpleType() {
-    var PersonObj = {
+    const PersonObj = {
         name: 'kwon',
         age: 21,
     };
@@ -44,4 +46,5 @@ function simpleType() {
     }
     printUser({ name: 'kim', age: 21 });
 }
+exports.simpleType = simpleType;
 // simpleType();

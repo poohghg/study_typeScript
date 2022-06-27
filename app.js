@@ -1,4 +1,5 @@
 "use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 function basicFunction() {
     function add(num1, num2) {
         // return은 기본적으로 타입스크립트가 추론한다.
@@ -25,12 +26,12 @@ function basicFunction() {
         return;
         // return undefined;
     }
-    var result = printLog(add, 1, 2);
+    const result = printLog(add, 1, 2);
     console.log(result);
     // TypeScript는 undefined 과 null 둘 다 각각 자신의 타입 이름으로 undefined , null로 사용
     // 이 밖에 이 변수들에 할당할 수 있는 값은 없다.
-    var u = undefined;
-    var n = null;
+    let u = undefined;
+    let n = null;
 }
 function functionArgs() {
     /**
@@ -45,17 +46,17 @@ function typeFunction() {
         return n1 + n2;
     }
     // any 타입에 다양한 값을 할당할 수 있다.
-    var addF;
+    let addF;
     addF = add;
     addF = 1;
     // 변수에 함수를 할당하기전에 변수에 함수 타입을 설정할 수 있다.
-    var fwithTyps;
+    let fwithTyps;
     // error
     // fwithTyps = 6;
     fwithTyps = add;
     console.log(fwithTyps(5, 5));
     // 화살표 함수
-    var addN = function (n1, n2) { return n1 + n2; };
+    let addN = (n1, n2) => n1 + n2;
     console.log(addN(1, 2));
 }
 // typeFunction();
@@ -66,7 +67,7 @@ function callback() {
     // 타입스크립트는 일급함수의 반환타입에 크게 간여하지 않는다.
     // 콜백 함수는 자신이 전달되는 인수가 반환 값을 기대하지 않는 경우에도 값을 반환할 수 있습니다.
     function actionFunction(n1, n2, cb) {
-        var result = n1 + n2;
+        const result = n1 + n2;
         cb(result);
         // return r;
         // 다음코드는 잘 리턴된다???
@@ -77,7 +78,7 @@ function callback() {
         console.log(n1 * 0.9);
         return n1 * 0.9;
     }
-    var result = actionFunction(3, 5, callR);
+    const result = actionFunction(3, 5, callR);
     // undefined
     console.log('result', result);
 }
@@ -85,14 +86,14 @@ function callback() {
 function basicUnknown() {
     // 기본적으로 any와는 다른타입이다.
     // unknown은 에러없이 모든 타입이 허용된다.
-    var userInput;
-    var name;
+    let userInput;
+    let name;
     userInput = 5;
     userInput = 'k';
     // error
     // unknown형식은 다른 타입에 할당할 수 없다.
     // 그러나 any는 상관없다.
-    // any는 컴파일시 확인과정을 거치짖 않는다.
+    // any는 컴파일시 확인과정을 거치지 않는다.
     // name = userInput;
     /**
      * unknown형식은 any보다 좀더 제한적이다.
@@ -104,4 +105,18 @@ function basicUnknown() {
         name = userInput;
     }
 }
-basicUnknown();
+// basicUnknown();
+function basicNever() {
+    // never 타입은 절대 발생할 수 없는 타입을 나타낸다.
+    // 항상 오류를 발생시키거나,
+    // 아무것도 반환하지 않는다고 명시하는 경우 사용된다.
+    function generateError(m, code) {
+        throw { message: m, code };
+    }
+    // never를 반환하는 함수는 함수의 마지막에 도달할 수 없다.
+    function infiniteLoop() {
+        while (true) { }
+    }
+    generateError('error!!!!!!', 501);
+}
+basicNever();

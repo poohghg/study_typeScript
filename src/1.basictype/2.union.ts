@@ -1,3 +1,4 @@
+export {};
 function basiCcombine() {
   // 유니언 타입: 인자값으로 여러타입이 올수 있음.
   function combine(input1: string | number, input2: string | number) {
@@ -39,8 +40,7 @@ function literalType() {
   console.log(combine('h', 'i', 'as-string'));
 }
 // literalType();
-
-function simpleType() {
+export function simpleType() {
   type Person = {
     name: string;
     age: number;

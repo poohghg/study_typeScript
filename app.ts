@@ -1,3 +1,4 @@
+export {};
 function basicFunction() {
   function add(num1: number, num2: number) {
     // return은 기본적으로 타입스크립트가 추론한다.
@@ -106,7 +107,7 @@ function basicUnknown() {
   // error
   // unknown형식은 다른 타입에 할당할 수 없다.
   // 그러나 any는 상관없다.
-  // any는 컴파일시 확인과정을 거치짖 않는다.
+  // any는 컴파일시 확인과정을 거치지 않는다.
   // name = userInput;
 
   /**
@@ -119,5 +120,19 @@ function basicUnknown() {
     name = userInput;
   }
 }
+// basicUnknown();
 
-basicUnknown();
+function basicNever() {
+  // never 타입은 절대 발생할 수 없는 타입을 나타낸다.
+  // 항상 오류를 발생시키거나,
+  // 아무것도 반환하지 않는다고 명시하는 경우 사용된다.
+  function generateError(m: string, code: number): never {
+    throw { message: m, code };
+  }
+  // never를 반환하는 함수는 함수의 마지막에 도달할 수 없다.
+  function infiniteLoop(): never {
+    while (true) {}
+  }
+  generateError('error!!!!!!', 501);
+}
+basicNever();

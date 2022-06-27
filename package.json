@@ -7,7 +7,9 @@
     "start": "lite-server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "devDependencies": {
-    "lite-server": "^2.6.1"
-  }
+  "dependencies": {
+    "parcel-bundler": "^1.12.5"
+  },
+  "repository": "https://github.com/poohghg/study_typeScript.git",
+  "author": "khg <poohghg@naver.com>"
 }
