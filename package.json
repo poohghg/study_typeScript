@@ -1,14 +1,18 @@
 {
   "name": "study_typeScript",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "index.html",
   "license": "ISC",
   "scripts": {
-    "start": "lite-server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "parcel index.html --open",
+    "build": "parcel build index.html"
   },
   "dependencies": {
-    "parcel-bundler": "^1.12.5"
+    "parcel-bundler": "^1.12.5",
+    "@babel/core": "7.2.0"
+  },
+  "resolutions": {
+    "@babel/preset-env": "7.13.8"
   },
   "repository": "https://github.com/poohghg/study_typeScript.git",
   "author": "khg <poohghg@naver.com>"
