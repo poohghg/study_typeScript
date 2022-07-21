@@ -1,5 +1,5 @@
 "use strict";
-const intersection = () => {
+const intersectionAndUnion = () => {
     function aboutMe(no) {
         return {
             name: 'kwon',
@@ -54,7 +54,57 @@ const intersection = () => {
     }
     useV(v1);
     useV(v2, 100);
-    // useV();
+    function moveObj(obj) {
+        let speed = 0;
+        switch (obj.type) {
+            case 'q':
+                speed = obj.flySpeed;
+                break;
+            case 'w':
+                speed = obj.runSpeed;
+                break;
+            default:
+                break;
+        }
+        return speed;
+    }
+    moveObj({ type: 'q', flySpeed: 50 });
     return undefined;
 };
-intersection();
+// intersectionAndUnion();
+const typeCasting = () => {
+    // 특정값이 특정 타입임을 알릴때 타입 캐스팅은 필수이다.
+    // 특정 html의 엘레멘트 속성을 사용하기위해 형 변환은 필수이다.
+    const input = document.querySelector('#input');
+    // 이는 타입스크립트에 선택한 요소가 null이 아닌 html엘레멘트라고 알려야 한다.
+    if (input)
+        input.value = 'Dd';
+    // !를 사용하여 널을 반환하지 않겠다고 타입스크립트에게 알리고 사용 할 수 있다.
+    const pTag = document.getElementById('pTag');
+    pTag.innerHTML = '안녕하세요';
+    return undefined;
+};
+// typeCasting();
+const flexbleIndex = () => {
+    const error = {
+        1: '1',
+        2: '2',
+    };
+    console.log(error);
+};
+// flexbleIndex();
+const etc = () => {
+    function add(a, b) {
+        if (typeof a === 'string' || typeof b === 'string')
+            return a.toString() + b.toString();
+        return a + b;
+    }
+    // 타입 스크립트는 변환타입이 정확이 무엇인지 알지 못한다.
+    // 타입스크립트는 AA타입이 숫자 또는 문자인지만 알고 있다.
+    const result = add(1, '3333');
+    console.log(result.split(' '));
+    // console.log(result);
+    // error
+    // result.split(" ");
+};
+etc();

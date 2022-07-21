@@ -1,4 +1,4 @@
-const intersection = () => {
+const intersectionAndUnion = () => {
   /**
    * 교차타입
    * 교차타입은 여러타입을 하나로 결합한다.
@@ -84,7 +84,81 @@ const intersection = () => {
   useV(v2, 100);
   // useV();
 
+  interface Q {
+    type: 'q';
+    flySpeed: number;
+  }
+  interface W {
+    type: 'w';
+    runSpeed: number;
+  }
+  type QW = Q | W;
+
+  function moveObj(obj: QW) {
+    let speed: number = 0;
+    switch (obj.type) {
+      case 'q':
+        speed = obj.flySpeed;
+        break;
+      case 'w':
+        speed = obj.runSpeed;
+        break;
+      default:
+        break;
+    }
+    return speed;
+  }
+  moveObj({ type: 'q', flySpeed: 50 });
   return undefined;
 };
+// intersectionAndUnion();
+const typeCasting = () => {
+  // 특정값이 특정 타입임을 알릴때 타입 캐스팅은 필수이다.
+  // 특정 html의 엘레멘트 속성을 사용하기위해 형 변환은 필수이다.
+  const input = document.querySelector('#input');
+  // 이는 타입스크립트에 선택한 요소가 null이 아닌 html엘레멘트라고 알려야 한다.
+  if (input) (input as HTMLInputElement).value = 'Dd';
+  // !를 사용하여 널을 반환하지 않겠다고 타입스크립트에게 알리고 사용 할 수 있다.
+  const pTag = document.getElementById('pTag')! as HTMLElement;
+  pTag.innerHTML = '안녕하세요';
+  return undefined;
+};
+// typeCasting();
+const flexbleIndex = () => {
+  // 객체가 지닐수 있는 속성에 보다 유연함을 제공
+  // 다음 객체는 다음형태로만 사용 될 수 있다.
+  interface ErrorContainer {
+    // 인덱스 타입으로 지정하면 속성값은 같은 타입이여야만 한다.
+    // id: number;
+    [key: string]: string;
+  }
 
-intersection();
+  const error: ErrorContainer = {
+    1: '1',
+    2: '2',
+  };
+  console.log(error);
+};
+// flexbleIndex();
+
+const etc = () => {
+  type AA = string | number;
+  // 오버로드를 통해 함수가 인자타입에 따른 리턴타입을 정의할 수 있다.
+  function add(a: number, b: number): number;
+  function add(a: AA, b: AA): string;
+  function add(a: AA, b: AA): AA {
+    if (typeof a === 'string' || typeof b === 'string')
+      return a.toString() + b.toString();
+    return a + b;
+  }
+
+  // 타입 스크립트는 변환타입이 정확이 무엇인지 알지 못한다.
+  // 타입스크립트는 AA타입이 숫자 또는 문자인지만 알고 있다.
+  const result = add(1, '3333');
+  console.log(result.split(' '));
+  // console.log(result);
+
+  // error
+  // result.split(" ");
+};
+etc();
