@@ -38,7 +38,68 @@ function basic() {
         const len = arr.length;
         return [...arr, len];
     }
-    const newArray = arrayLen(['3', '11']);
+    const newArray = arrayLen([3, '11']);
     console.log(newArray);
 }
-basic();
+// basic();
+function keyOf() {
+    function extractValue(obj, key) {
+        return obj[key];
+    }
+    extractValue({ name: 'kwon' }, 'name');
+}
+// keyOf();
+function testClass() {
+    class DataStorage {
+        constructor() {
+            this.data = [];
+        }
+        addItem(item) {
+            this.data.push(item);
+        }
+        removeItem(item) {
+            const index = this.data.indexOf(item);
+            if (index === -1)
+                return;
+            this.data.splice(index, 1);
+        }
+        getItems() {
+            return [...this.data];
+        }
+    }
+    // 제네릭을 사용시 기본적으로 타이스크립트가 타입을 추론한다.
+    // 물론 타입을 명시할수 도 있음
+    const data = new DataStorage();
+    data.addItem(1);
+    data.addItem(2);
+    data.addItem(3);
+    data.addItem(4);
+    data.addItem(5);
+    data.removeItem(6);
+    // data.removeItem(3);
+    // data.addItem(5);
+    console.log(data.getItems());
+    const sDatas = new DataStorage();
+    // sDatas.addItem(1);
+    console.log(sDatas.getItems());
+    const obj1 = { name: 'kwon' };
+    // const objDatas = new DataStorage<object>();
+    // objDatas.addItem(obj1);
+    // objDatas.removeItem(obj1);
+}
+// testClass();
+function utility() {
+    // 파셜타입은 우리가 만든 타입의 속성이 선택적으로 사용될수 있다는것을 명시?
+    const goal = {};
+    goal.title = 'title';
+    goal.desc = 'its title';
+    goal.completData = new Date();
+    console.log(goal);
+    // 오직 읽기만 가능한 배열이다.
+    const ages = [1, 2, 3, 4, 5];
+    // ages.push([1]);
+    // ages.
+    console.log(ages);
+    // const obj: Readonly<Goal> = {};
+}
+// utility();
