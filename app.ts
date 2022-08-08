@@ -5,17 +5,33 @@
  */
 
 function basic() {
-  // 팩토리 패ㅔㅌ
-  function Logger(log: String) {
+  function Logger(log?: String) {
+    console.log('Logger');
     return (constructor: Function) => {
+      console.log('return Logger');
       console.log(log);
       console.log(constructor);
       console.log('-----end-----');
     };
   }
 
+  function withTemplate(template: string, hookId: string) {
+    console.log('withTemplate');
+    return (constructor: any) => {
+      console.log('return withTemplate');
+      const el = document.getElementById(hookId);
+      const p = new constructor('kwon');
+      if (el) {
+        el.innerHTML = template;
+        el.querySelector('p')!.textContent = p.name;
+      }
+    };
+  }
+
   // 데코레이터를 통해 클래스를 호출하지 않아도 데코레이터 함수는 실행된다.
-  @Logger('LOGGING_PERSON')
+  const template = `<p>test</p>`;
+  @Logger()
+  @withTemplate(template, 'app')
   class Person {
     name: string;
     desc: string = 'Person';
@@ -24,8 +40,27 @@ function basic() {
       this.name = name;
     }
   }
-
-  const kwon = new Person('kwon');
-  console.log(kwon);
+  // const kwon = new Person('kwon');
+  // console.log(kwon);
 }
-basic();
+// basic();
+function decoratorosProperty() {
+  class Product {
+    title: string;
+    _price: number;
+
+    set price(val: number) {
+      if (val > 0) this._price = val;
+      else throw new Error('val is eroor');
+    }
+
+    constructor(t: string, p: number) {
+      this.title = t;
+      this._price = p;
+    }
+    getPriceWithTax(tax: Number) {
+      return this._price * (1 + tax);
+    }
+  }
+}
+decoratorosProperty();
